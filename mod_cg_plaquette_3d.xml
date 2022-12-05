@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 	<description>CG_3D_DESC</description>
 	<files>
 		<filename module="mod_cg_plaquette_3d">mod_cg_plaquette_3d.php</filename>
@@ -45,6 +45,7 @@
 			</fieldset>
 		</fields>
 	</config>
+	<changelogurl>https://raw.githubusercontent.com/conseilgouz/mod_cg_plaquette_3d_j4/master/mod_cg_plaquette_3d_changelog.xml</changelogurl>
 	<updateservers>
 	<server type="extension" name="CG Plaquette 3D" priority="1">https://www.conseilgouz.com/updates/cg_plaquette_3d_update.xml</server>
 	</updateservers>
