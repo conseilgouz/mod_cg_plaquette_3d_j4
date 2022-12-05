@@ -2,6 +2,17 @@
 	<changelog>
 		<element>mod_cg_plaquette_3d</element>
 		<type>Module</type>
+		<version>3.0.4</version>
+        <note>
+            <item>Update : 05/12/2022</item>
+        </note>
+		<fix>
+			<item>Custom CSS not loaded</item>
+		</fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_plaquette_3d</element>
+		<type>Module</type>
 		<version>3.0.3</version>
         <note>
             <item>Update : 05/12/2022</item>

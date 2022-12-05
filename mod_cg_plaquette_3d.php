@@ -1,7 +1,7 @@
 <?php
 /**
 * CG Plaquette 3D - Joomla Module 
-* Version			: 3.0.0
+* Version			: 3.0.4
 * Package			: Joomla 4.x
 * copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
@@ -21,7 +21,7 @@ $num_sf		= 'mod'.$nummod_sf;
 
 // JHtml::_('jquery.framework');
 $wa = Factory::getDocument()->getWebAssetManager();
-if ($params->get('css')) $wa->addInlineStyle($params->get('cssp3d')); 
+if ($params->get('cssp3d')) $wa->addInlineStyle($params->get('cssp3d')); 
 $wa->registerAndUseStyle('3d',$modulefield.'css/plaquette.css');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
 	Factory::getDocument()->addScript(''.URI::base(true).'/media/mod_cg_plaquette_3d/js/plaquette.js'); 
