@@ -2,6 +2,20 @@
 	<changelog>
 		<element>mod_cg_plaquette_3d</element>
 		<type>Module</type>
+		<version>3.0.3</version>
+        <note>
+            <item>Update : 05/12/2022</item>
+        </note>
+		<change>
+			<item>Small screen/large screen display</item>
+		</change>
+		<addition>
+			<item>module class suffix</item>
+		</addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_plaquette_3d</element>
+		<type>Module</type>
 		<version>3.0.1</version>
         <note>
             <item>Update : 05/12/2022</item>

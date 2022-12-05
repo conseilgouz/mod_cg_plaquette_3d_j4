@@ -1,6 +1,6 @@
 /**
 * CG Plaquette 3D - Joomla Module 
-* Version			: 3.0.0
+* Version			: 3.0.3
 * Package			: Joomla 4.x
 * copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function go_plaquette(myid) {	
 	var $main = document.querySelector( '#cg_plq_3d_main_'+myid),	
+		$small = document.querySelector( '#cg_plq_3d_small_'+myid),
 		$thumb = document.querySelector('#cg_photo_'+myid),
 		$wrapper = $main.querySelector('.rm-wrapper'),
 		$cover = $main.querySelector( 'div.rm-cover' ),
@@ -24,14 +25,18 @@ function go_plaquette(myid) {
 		$close = $right.querySelector('span.rm-close'),
 		$back = $right.querySelector('span.rm-backpage'),
 		$closeall = $main.querySelector('span.rm-close-all');
+		$closeallsmall = $small.querySelector('span.rm-close-all');
 
-   //  jQuery($main).detach().appendTo('body'); // move it at the end of file
 	['click', 'touchstart'].forEach(type => {
 		$closeall.addEventListener( type, function( event ) {
 			removeClass($cover, 'rm-open rm-nodelay rm-in' );
 			removeClass($right, 'rm-open rm-nodelay rm-in' );
 			removeClass($wrapper,'return');
 			removeClass($main,"cg_show");
+			return false;
+		});
+		$closeallsmall.addEventListener( type, function( event ) {
+			removeClass($small,"cg_show");
 			return false;
 		});
 		$cover.addEventListener( type, function( event ) {
@@ -66,7 +71,9 @@ function go_plaquette(myid) {
 		$thumb.addEventListener(type,function(){ 
 			var myid = this.getAttribute("data");
 			$main = document.querySelector( '#cg_plq_3d_main_'+myid);	
-			addClass($main,"cg_show");
+			$small = document.querySelector( '#cg_plq_3d_small_'+myid);	
+			if (!hasClass($main,'cg_show') && window.screen.width > 575)  addClass($main,"cg_show");
+			if (!hasClass($small,'cg_show') && window.screen.width < 576)  addClass($small,"cg_show");
 			return false;
 		});
 	});
@@ -78,6 +85,7 @@ function go_plaquette(myid) {
 		removeClass($right,'rm-open rm-nodelay rm-in' );
 		removeClass($wrapper,'return')
 		removeClass($main,"cg_show");
+		removeClass($small,"cg_show");
 		return false;
     }
 };

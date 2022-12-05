@@ -1,7 +1,7 @@
 <?php
 /**
 * CG Plaquette 3D - Joomla Module 
-* Version			: 3.0.0
+* Version			: 3.0.3
 * Package			: Joomla 4.x
 * copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
@@ -51,12 +51,13 @@ for ($i = $ix; $i < 6; $i++) { // on force le nombre de pages pour être à 6 pa
 if ($thumb == "") {
 	$thumb = "<img src='".$baseurl."media/mod_cg_plaquette_3d/img/pasdimage.jpg' ";
 }
+$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx',''));
 ?>
-<div class="cg_plq_3d" id="cg_plq_3d_<?php echo $module->id;?>" data="<?php echo $module->id;?>">
+<div class="cg_plq_3d <?php echo $moduleclass_sfx;?>" id="cg_plq_3d_<?php echo $module->id;?>" data="<?php echo $module->id;?>">
 	<header>
 		<a class="cg-photo" id="cg_photo_<?php echo $module->id;?>" data="<?php echo $module->id;?>"><?php echo $thumb;?></a>
 	</header>
-	<section class="cg_plq_3d_main" id="cg_plq_3d_main_<?php echo $module->id;?>">
+	<section class="cg_plq_3d_main d-none d-sm-block" id="cg_plq_3d_main_<?php echo $module->id;?>">
 		<div class="cg-3d-container">
 			<div class="rm-wrapper">
 				<div class="rm-cover">
@@ -87,6 +88,21 @@ if ($thumb == "") {
 						<?php echo $pages[4]; // page 5 ?>
 					</div><!-- /rm-back -->
 				</div><!-- /rm-right -->
+			</div><!-- /rm-wrapper -->
+			<div>
+				<span class="rm-close-all" title="<?php echo Text::_('CG_3D_CLOSEALL_TITLE'); ?>">X</span>
+			</div>
+		</div><!-- /cg-3d-container -->
+	</section>
+	<section class="cg_plq_3d_main .d-block .d-sm-none" id="cg_plq_3d_small_<?php echo $module->id;?>">
+		<div class="cg-3d-container">
+			<div class="rm-wrapper">
+						<?php echo $pages[0]; // page 1 ?>
+						<?php echo $pages[1]; // page 2 ?>
+						<?php echo $pages[3]; // page 3 ?>
+						<?php echo $pages[4]; // page 4 ?>
+						<?php echo $pages[5]; // page 5 ?>
+						<?php echo $pages[6]; // page 6 ?>
 			</div><!-- /rm-wrapper -->
 			<div>
 				<span class="rm-close-all" title="<?php echo Text::_('CG_3D_CLOSEALL_TITLE'); ?>">X</span>

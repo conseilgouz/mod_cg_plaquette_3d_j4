@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>3.0.2</version>
+	<version>3.0.3</version>
 	<description>CG_3D_DESC</description>
 	<files>
 		<filename module="mod_cg_plaquette_3d">mod_cg_plaquette_3d.php</filename>
