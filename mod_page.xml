@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+     <fieldset name="page">
+	    <field name="note-page" type="note" label="CG_3D_NOTE_PAGE" class="page_3d" />
+		<field name="cg_page_type" type="radio" label="CG_3D_TYPE" description="CG_3D_TYPE_DESC"
+			class="btn-group" default="img">
+			<option value="img">CG_ONE_FILE</option>
+			<option	value="text">CG_TEXT</option>
+		</field>
+		<field showon="cg_page_type:img"
+			name="file" type="media" directory="/images"
+			label="CG_3D_FILE" description="CG_3D_FILE_DESC"
+			size="50" hide_none="true" hide_default="true" />
+		<field showon="cg_page_type:text" name="text" type="editor" label="CG_TEXT" description="CG_TEXT_DESC" cols="40" rows="4" filter="safehtml" default="" />
+	</fieldset>
+</form>

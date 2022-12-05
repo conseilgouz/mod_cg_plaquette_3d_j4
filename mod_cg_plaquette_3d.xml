@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension	type="module" client="site" method="upgrade">
+	<name>CG_3D_TITLE</name>
+	<author>ConseilGouz</author>
+	<creationDate>December 2022</creationDate>
+	<copyright>Copyright (C) 2022 ConseilGouz. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
+	<authorUrl>www.conseilgouz.com</authorUrl>
+	<version>3.0.0</version>
+	<description>CG_3D_DESC</description>
+	<files>
+		<filename module="mod_cg_plaquette_3d">mod_cg_plaquette_3d.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_page.xml</filename>		
+		<folder>tmpl</folder>
+	</files>
+	<scriptfile>script.php</scriptfile>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_cg_plaquette_3d.ini</language>
+		<language tag="en-GB">language/en-GB/mod_cg_plaquette_3d.sys.ini</language>
+		<language tag="fr-FR">language/fr-FR/mod_cg_plaquette_3d.ini</language>
+		<language tag="fr-FR">language/fr-FR/mod_cg_plaquette_3d.sys.ini</language>
+	</languages>
+	<media destination="mod_cg_plaquette_3d" folder="media">
+		<folder>js</folder>
+		<folder>img</folder>
+		<folder>css</folder>
+		<filename>index.html</filename>
+	</media>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field  type="note" name="note0" label="CG_3D_NOTE_0" heading="p" class="alert-success"/>
+				<field name="pageList" label="" type="subform" multiple ="true" 
+					formsource="/modules/mod_cg_plaquette_3d/mod_page.xml" groupByFieldset="true" max="6" />
+				<field  type="note" name="note1" label="CG_3D_NOTE" heading="p" class="alert-success"/>
+				<field name="cssp3d" type="textarea" label="CG_3D_CSS" description="CG_3D_CSS_DESC" cols="40" rows="4" filter="raw" 
+					default=".cg-photo img { height: 30vh;}"/>
+			</fieldset>
+			<fieldset name="advanced">
+				<field	name="moduleclass_sfx"	type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+	<updateservers>
+	<server type="extension" name="CG Plaquette 3D" priority="1">https://www.conseilgouz.com/updates/cg_plaquette_3d_update.xml</server>
+	</updateservers>
+	
+</extension>

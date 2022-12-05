@@ -1,0 +1,45 @@
+/**
+* CG Plaquette 3D - Joomla Module 
+* Version			: 2.1.0
+* Package			: Joomla 3.9.x
+* copyright 		: Copyright (C) 2020 ConseilGouz. All rights reserved.
+* license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+* From              : https://tympanus.net/codrops/2012/09/25/3d-restaurant-menu-concept/
+*/
+.form-horizontal .controls {
+	margin-left: 10px;
+}
+
+.subform-repeatable-group  .control-group:nth-of-type(1) .control-label , 
+.subform-repeatable-group  .control-group:nth-of-type(2) .control-label ,
+.subform-repeatable-group  .control-group:nth-of-type(3) .control-label ,
+.subform-repeatable-group  .control-group:nth-of-type(4) .control-label  {
+	width: 10em;
+	display:inherit
+}
+.subform-repeatable-group  .control-group:nth-of-type(2)  {
+	float:left; width:70%;
+}
+.subform-repeatable-group  .control-group:nth-of-type(3)  {
+	float: left; width:100%
+}
+.subform-repeatable-group  .control-group:nth-of-type(4)  {
+	float: left; width:100%
+}
+.subform-repeatable-group  .control-group:nth-of-type(4) .controls {
+	float:right; width:80%;
+}
+.form-horizontal .control-label {
+    width:15%;
+}
+.info-labels + div {
+background: none repeat scroll 0 0 #EEEEEE;
+color: #000000;
+font-size: 110%;
+font-style: italic;
+font-weight: normal;
+margin: 15px 0 30px;
+padding: 15px 10px 10px 20px;
+}
+.control-label {display:none}
+
