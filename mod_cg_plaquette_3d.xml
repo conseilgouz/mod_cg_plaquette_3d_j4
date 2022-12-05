@@ -47,7 +47,7 @@
 	</config>
 	<changelogurl>https://raw.githubusercontent.com/conseilgouz/mod_cg_plaquette_3d_j4/master/mod_cg_plaquette_3d_changelog.xml</changelogurl>
 	<updateservers>
-	<server type="extension" name="CG Plaquette 3D" priority="1">https://www.conseilgouz.com/updates/cg_plaquette_3d_update.xml</server>
+	<server type="extension" name="CG Plaquette 3D" priority="1">https://raw.githubusercontent.com/conseilgouz/updates_github/master/cg_plaquette_3d_update.xml</server>
 	</updateservers>
 	
 </extension>
