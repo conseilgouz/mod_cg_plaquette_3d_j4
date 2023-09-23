@@ -2,12 +2,12 @@
 <extension	type="module" client="site" method="upgrade">
 	<name>CG_3D_TITLE</name>
 	<author>ConseilGouz</author>
-	<creationDate>December 2022</creationDate>
-	<copyright>Copyright (C) 2022 ConseilGouz. All rights reserved.</copyright>
+	<creationDate>2023-09-23</creationDate>
+	<copyright>Copyright (C) 2023 ConseilGouz. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>3.0.4</version>
+	<version>3.1.0</version>
 	<description>CG_3D_DESC</description>
 	<files>
 		<filename module="mod_cg_plaquette_3d">mod_cg_plaquette_3d.php</filename>

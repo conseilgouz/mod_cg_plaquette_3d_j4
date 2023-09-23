@@ -1,18 +1,18 @@
 <?php
 /**
 * Plaquette 3D module  - Joomla Module 
-* Version			: 3.0.0
-* Package			: Joomla 4.x
-* copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
+* Version			: 3.1.0
+* Package			: Joomla 4.x/5.x
+* copyright 		: Copyright (C) 2023 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 */
 // No direct access to this file
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Filesystem\Folder;
+use Joomla\Filesystem\Folder;
 use Joomla\CMS\Version;
-use Joomla\CMS\Filesystem\File;
+use Joomla\Filesystem\File;
 
 class mod_cg_plaquette_3dInstallerScript
 {
@@ -76,10 +76,10 @@ class mod_cg_plaquette_3dInstallerScript
 		}
 		
         switch ($type) {
-            case 'install': $message = JText::_('ISO_POSTFLIGHT_INSTALLED'); break;
-            case 'uninstall': $message = JText::_('ISO_POSTFLIGHT_UNINSTALLED'); break;
-            case 'update': $message = JText::_('ISO_POSTFLIGHT_UPDATED'); break;
-            case 'discover_install': $message = JText::_('ISO_POSTFLIGHT_DISC_INSTALLED'); break;
+            case 'install': $message = Text::_('ISO_POSTFLIGHT_INSTALLED'); break;
+            case 'uninstall': $message = Text::_('ISO_POSTFLIGHT_UNINSTALLED'); break;
+            case 'update': $message = Text::_('ISO_POSTFLIGHT_UPDATED'); break;
+            case 'discover_install': $message = Text::_('ISO_POSTFLIGHT_DISC_INSTALLED'); break;
         }
 
 		// Uninstall this installer
@@ -113,7 +113,7 @@ class mod_cg_plaquette_3dInstallerScript
 		$j = new Version();
 		$version=$j->getShortVersion(); 
 		$version_arr = explode('.',$version);
-		if (($version_arr[0] == "4") || (($version_arr[0] == "3") && ($version_arr[1] == "10"))) {
+		if (($version_arr[0] >= "4") || (($version_arr[0] == "3") && ($version_arr[1] == "10"))) {
 			// Delete 3.9 and older language files
 			$langFiles = [
 				sprintf("%s/language/en-GB/en-GB.%s.ini", JPATH_SITE, $this->extname),
@@ -148,7 +148,7 @@ class mod_cg_plaquette_3dInstallerScript
 		if (version_compare(JVERSION, $this->min_joomla_version, '<'))
 		{
 			Factory::getApplication()->enqueueMessage(
-				JText::sprintf(
+				Text::sprintf(
 					'NOT_COMPATIBLE_UPDATE',
 					'<strong>' . JVERSION . '</strong>',
 					'<strong>' . $this->min_joomla_version . '</strong>'
@@ -169,7 +169,7 @@ class mod_cg_plaquette_3dInstallerScript
 		if (version_compare(PHP_VERSION, $this->min_php_version, 'l'))
 		{
 			Factory::getApplication()->enqueueMessage(
-				JText::sprintf(
+				Text::sprintf(
 					'NOT_COMPATIBLE_PHP',
 					'<strong>' . PHP_VERSION . '</strong>',
 					'<strong>' . $this->min_php_version . '</strong>'
@@ -185,7 +185,7 @@ class mod_cg_plaquette_3dInstallerScript
 	
 	private function uninstallInstaller()
 	{
-		if ( ! JFolder::exists(JPATH_PLUGINS . '/system/' . $this->installerName)) {
+		if ( ! is_dir(JPATH_PLUGINS . '/system/' . $this->installerName)) {
 			return;
 		}
 		$this->delete([
