@@ -1,0 +1,40 @@
+<?php
+/**
+* CG Plaquette 3D - Joomla Module 
+* Package			: Joomla 4.x/5.x/6.x
+* copyright 		: Copyright (C) 2025 ConseilGouz. All rights reserved.
+* license    		: https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+* From              : https://tympanus.net/codrops/2012/09/25/3d-restaurant-menu-concept/
+*/
+
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Extension\Service\Provider\HelperFactory;
+use Joomla\CMS\Extension\Service\Provider\Module;
+use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
+use Joomla\DI\Container;
+use Joomla\DI\ServiceProviderInterface;
+
+/**
+ * The alterte meteo module service provider.
+ *
+ * @since  4.2.0
+ */
+return new class () implements ServiceProviderInterface {
+    /**
+     * Registers the service provider with a DI container.
+     *
+     * @param   Container  $container  The DI container.
+     *
+     * @return  void
+     *
+     * @since   4.2.0
+     */
+    public function register(Container $container)
+    {
+        $container->registerServiceProvider(new ModuleDispatcherFactory('\\ConseilGouz\\Module\\CGPlaquette3D'));
+        $container->registerServiceProvider(new HelperFactory('\\ConseilGouz\\Module\\CGPlaquette3D\\Site\\Helper\\CGPlaquette3DHelper'));
+
+        $container->registerServiceProvider(new Module());
+    }
+};

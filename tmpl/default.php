@@ -1,10 +1,9 @@
 <?php
 /**
 * CG Plaquette 3D - Joomla Module 
-* Version			: 3.0.3
-* Package			: Joomla 4.x
-* copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
-* license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+* Package			: Joomla 4.x/5.x/6.x
+* copyright 		: Copyright (C) 2025 ConseilGouz. All rights reserved.
+* license    		: https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
 * From              : https://tympanus.net/codrops/2012/09/25/3d-restaurant-menu-concept/
 */
 // no direct access
@@ -14,6 +13,19 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Language\Text;
+
+
+$modulefield	= 'media/mod_cg_plaquette_3d/';
+
+//Get this module id
+$nummod_sf		= $module->id;
+$num_sf		= 'mod'.$nummod_sf;
+
+// JHtml::_('jquery.framework');
+$wa = Factory::getDocument()->getWebAssetManager();
+if ($params->get('cssp3d')) $wa->addInlineStyle($params->get('cssp3d')); 
+$wa->registerAndUseStyle('3d',$modulefield.'css/plaquette.css');
+$wa->registerAndUseScript('3d',$modulefield.'js/plaquette.js');
 
 $baseurl 		= URI::base();
 $titles = array(Text::_('CG_3D_OPENCLOSE') , Text::_('CG_3D_CLOSE') , Text::_('CG_3D_TURN') , Text::_('CG_3D_BACK') , Text::_('CG_3D_OPEN'), Text::_('CG_3D_TURN') );

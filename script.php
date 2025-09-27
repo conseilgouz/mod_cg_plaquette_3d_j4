@@ -1,18 +1,19 @@
 <?php
 /**
-* Plaquette 3D module  - Joomla Module 
-* Version			: 3.1.0
-* Package			: Joomla 4.x/5.x
-* copyright 		: Copyright (C) 2023 ConseilGouz. All rights reserved.
-* license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+* CG Plaquette 3D - Joomla Module 
+* Package			: Joomla 4.x/5.x/6.x
+* copyright 		: Copyright (C) 2025 ConseilGouz. All rights reserved.
+* license    		: https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+* From              : https://tympanus.net/codrops/2012/09/25/3d-restaurant-menu-concept/
 */
 // No direct access to this file
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use Joomla\Filesystem\Folder;
 use Joomla\CMS\Version;
+use Joomla\Database\DatabaseInterface;
 use Joomla\Filesystem\File;
+use Joomla\Filesystem\Folder;
 
 class mod_cg_plaquette_3dInstallerScript
 {
@@ -22,13 +23,14 @@ class mod_cg_plaquette_3dInstallerScript
 	private $exttype                 = 'module';
 	private $extname                 = 'mod_cg_plaquette_3d';
 	private $previous_version        = '';
+    private $newlib_version	         = '';
 	private $dir           = null;
 	private $lang = null;
 	private $installerName = 'simpleisotopeinstaller';
 	public function __construct()
 	{
 		$this->dir = __DIR__;
-		$this->lang = Factory::getLanguage();
+		$this->lang = Factory::getApplication()->getLanguage();
 		$this->lang->load($this->extname);
 	}
     function preflight($type, $parent)
@@ -57,24 +59,23 @@ class mod_cg_plaquette_3dInstallerScript
 		
     }
     
-    function install($parent)
-    {
-    }
-    
-    function uninstall($parent)
-    {
-    }
-    
-    function update($parent)
-    {
-    }
-    
     function postflight($type, $parent)
     {
 		if (($type=='install') || ($type == 'update')) { // remove obsolete dir/files
 			$this->postinstall_cleanup();
 		}
-		
+        if (!$this->checkLibrary('conseilgouz')) { // need library installation
+            $ret = $this->installPackage('lib_conseilgouz');
+            if ($ret) {
+                Factory::getApplication()->enqueueMessage('ConseilGouz Library ' . $this->newlib_version . ' installed', 'notice');
+            }
+        }
+        // delete obsolete version.php file
+        $this->delete([
+            JPATH_SITE . '/modules/mod_'.$this->extname.'/src/Field/VersionField.php',
+            JPATH_SITE . '/modules/mod_'.$this->extname.'/mod_cg_plaquette_3d.php',
+        ]);
+
         switch ($type) {
             case 'install': $message = Text::_('ISO_POSTFLIGHT_INSTALLED'); break;
             case 'uninstall': $message = Text::_('ISO_POSTFLIGHT_UNINSTALLED'); break;
@@ -128,7 +129,7 @@ class mod_cg_plaquette_3dInstallerScript
 			}
 		}
 		// remove obsolete update sites
-		$db = Factory::getDbo();
+		$db = Factory::getContainer()->get(DatabaseInterface::class);
 		$query = $db->getQuery(true)
 			->delete('#__update_sites')
 			->where($db->quoteName('location') . ' like "%432473037d.url-de-test.ws/%"');
@@ -182,7 +183,41 @@ class mod_cg_plaquette_3dInstallerScript
 
 		return true;
 	}
-	
+    private function checkLibrary($library)
+    {
+        $file = $this->dir.'/lib_conseilgouz/conseilgouz.xml';
+        if (!is_file($file)) {// library not installed
+            return false;
+        }
+        $xml = simplexml_load_file($file);
+        $this->newlib_version = $xml->version;
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
+        $conditions = array(
+             $db->qn('type') . ' = ' . $db->q('library'),
+             $db->qn('element') . ' = ' . $db->quote($library)
+            );
+        $query = $db->getQuery(true)
+                ->select('manifest_cache')
+                ->from($db->quoteName('#__extensions'))
+                ->where($conditions);
+        $db->setQuery($query);
+        $manif = $db->loadObject();
+        if ($manif) {
+            $manifest = json_decode($manif->manifest_cache);
+            if ($manifest->version >= $this->newlib_version) { // compare versions
+                return true; // library ok
+            }
+        }
+        return false; // need library
+    }
+    private function installPackage($package)
+    {
+        $tmpInstaller = new Joomla\CMS\Installer\Installer();
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
+        $tmpInstaller->setDatabase($db);
+        $installed = $tmpInstaller->install($this->dir . '/' . $package);
+        return $installed;
+    }
 	private function uninstallInstaller()
 	{
 		if ( ! is_dir(JPATH_PLUGINS . '/system/' . $this->installerName)) {
@@ -192,7 +227,7 @@ class mod_cg_plaquette_3dInstallerScript
 			JPATH_PLUGINS . '/system/' . $this->installerName . '/language',
 			JPATH_PLUGINS . '/system/' . $this->installerName,
 		]);
-		$db = Factory::getDbo();
+		$db = Factory::getContainer()->get(DatabaseInterface::class);
 		$query = $db->getQuery(true)
 			->delete('#__extensions')
 			->where($db->quoteName('element') . ' = ' . $db->quote($this->installerName))
@@ -202,5 +237,17 @@ class mod_cg_plaquette_3dInstallerScript
 		$db->execute();
 		Factory::getCache()->clean('_system');
 	}
-	
+    public function delete($files = [])
+    {
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                Folder::delete($file);
+            }
+
+            if (is_file($file)) {
+                File::delete($file);
+            }
+        }
+    }
+
 }
